@@ -1,7 +1,5 @@
  .playerContainer {
-   width: 26.5rem;
-   height: 10vh;
-   height: 100vh;
+   width: 25rem;
 
    background: var(--purple-500);
    color: var(--white);
@@ -32,6 +30,34 @@
      }
    }
  }
+
+ .currentEpisode {
+  text-align: center;
+  
+  img {
+    border-radius: 1.5rem;
+  }
+
+  strong {
+    display: block;
+    margin-top: 2rem;
+    font: 250 1.15rem Lexend, sans-serif;
+    line-height: 1.75rem;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  span {
+    display: flex;
+    margin-top:  1rem;
+    opacity: 0.6;
+    line-height: 1.5rem;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 
  .emptyPlayer {
     width: 90%;
@@ -78,7 +104,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 2.5rem;
+  margin-top: 1rem;
   gap: 1.5rem;
   padding: 1.5rem;
   margin-left: 1.2rem;
@@ -88,11 +114,25 @@
     border: 0;
     font-size: 0;
 
+    transition: filter 0.2s;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+      filter:  brightness(0.8);
+    }
+
     &.playButton {
       width: 4rem;
       height: 4rem;;
       border-radius: 1rem;
       background: var(--purple-300);
+
+      &:hover:not(:disabled) {
+        filter:  brightness(0.90);
+      }
     }
   }
 }
