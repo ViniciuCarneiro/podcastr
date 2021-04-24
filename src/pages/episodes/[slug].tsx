@@ -7,6 +7,7 @@ import ptBR from 'date-fns/locale/pt-BR';
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString';
 
 import styles from './episode.module.scss';
+import { usePlayer } from '../../context/PlayerContext';
 
 type Episode = {
     id: string,
@@ -25,6 +26,11 @@ type EpisodeProps = {
 }
 
 export default function Episode({ episode }: EpisodeProps) {
+
+    const {
+        playPause,
+        isPlaying } = usePlayer();
+
     return (
         <div className={styles.episode}>
             <div className={styles.thumbnailContainer}>
@@ -39,8 +45,14 @@ export default function Episode({ episode }: EpisodeProps) {
                     src={episode.thumbnail}
                     objectFit="cover"
                 />
-                <button type="button">
-                    <img src="/play.svg" alt="Play" />
+                <button type="button" onClick={() => playPause(episode, isPlaying)}>
+                    {
+                        isPlaying ? (
+                            <img src="/pause.svg" alt="Pause" />
+                        ) : (
+                            <img src="/play.svg" alt="Play" />
+                        )
+                    }
                 </button>
             </div>
 
@@ -80,7 +92,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     return {
         paths,
-        fallback: 'blocking' 
+        fallback: 'blocking'
     }
 }
 
